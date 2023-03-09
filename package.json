@@ -17,5 +17,14 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ashikbau/Random-user-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ashikbau/Random-user-node/issues"
+  },
+  "homepage": "https://github.com/ashikbau/Random-user-node#readme",
   "description": ""
 }

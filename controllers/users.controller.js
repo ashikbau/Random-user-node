@@ -1,6 +1,7 @@
 const { use } = require('../routes/v1/user.route');
 const fs = require('fs');
 const { json } = require('stream/consumers');
+const { request } = require('http');
 
 module.exports.getAllUsers=(req,res,next)=>{
 
@@ -19,11 +20,13 @@ module.exports.getAllUsers=(req,res,next)=>{
   }
 
   module.exports.getRandomUser=(req,res,next)=>{
-    const id= req.params.id;
-    const filter = {id:id};
-    
+    const getRandomNumber=require('../utilis/randomUser')
+     
+   
+   
     const users=require('../user.json')
-    const newUser = users.find(user=>user.id ==Number(id));
+     const number= getRandomNumber(1,users.length)
+    const newUser = users.find(user=>user.id ==number);
     
     res.send(newUser)
   
