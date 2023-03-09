@@ -9,6 +9,7 @@ router
 .route('/')
 
 .get(usersController.getAllUsers)
+.patch(usersController.updateMultipleUsers)
 
   
   // .get(usersController.getRandomUser)
@@ -16,6 +17,7 @@ router
 router.route('/:id')
 .get(usersController.getRandomUser)
 .patch(usersController.updateUser)
+
 .delete(usersController.deleteUser)
 
 module.exports= router;

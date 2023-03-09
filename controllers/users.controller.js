@@ -132,6 +132,46 @@ module.exports.updateUser=(req,res)=>{
 }
 
 
+// update multiple user
+module.exports.updateMultipleUsers=(req,res)=>{
+  let users
+  fs.readFile('user.json',(err,data)=>{
+    if(err){
+      res.send('something went wrong')
+    } else{
+      const data1=req.body
+      users = JSON.parse(data)
+
+      const update= users.map(user=>{
+
+        const found = data1.find(element => element.id === user.id)
+
+        if (found) {
+          return {...user,name:found.name}
+      }
+      else {
+          return user
+
+      }
+       
+        
+      })
+      // res.send(update)
+      fs.writeFileSync('user.json',JSON.stringify(update),(err)=>{
+        if(err){
+          res.send('Something went wrong')
+        } else{
+          res.send('user updated successfully')
+        }
+      })
+      res.send(update)
+
+     
+    }
+  })
+  }
+
+
 
 // Delete User
 
