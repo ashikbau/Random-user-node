@@ -65,10 +65,10 @@ module.exports.getAllUsers=(req,res,next)=>{
 
 fs.writeFileSync("user.json",JSON.stringify(dataObject),(err)=>{
   if(err){
-    console.log(err)
+    res.send('Something went wrong')
   }
   else{
-    console.log("File written successfully\n");
+    res.send('User Added successfully')
   }
 })
    
@@ -84,14 +84,14 @@ module.exports.updateUser=(req,res)=>{
 
   fs.readFile('user.json', (err, data) => {
       if (err) {
-          res.send('Some error')
+        res.send('Something went wrong')
 
       }
       else {
           user = JSON.parse(data)
          
           const {id}=req.params;
-          console.log(id)
+          // console.log(id)
           
           const updateUser=user.map(x=>{
 
@@ -114,21 +114,18 @@ module.exports.updateUser=(req,res)=>{
             else{
               return x
             }
-            
+            })
 
-          })
            fs.writeFileSync("user.json",JSON.stringify(updateUser),(err)=>{
             if(err){
-              console.log('something went wrong')
+              res.send('Something went wrong')
             } else{
-              console.log('user updated successfully')
+              res.send('user updated successfully')
             }
            })
            res.send(updateUser)
           }
-
-      // const upadte=use.filter(x=>x.id!==id)
-    })
+         })
 }
 
 
@@ -151,12 +148,9 @@ module.exports.updateMultipleUsers=(req,res)=>{
       }
       else {
           return user
-
-      }
-       
-        
-      })
-      // res.send(update)
+        }
+       })
+      
       fs.writeFileSync('user.json',JSON.stringify(update),(err)=>{
         if(err){
           res.send('Something went wrong')
@@ -165,8 +159,6 @@ module.exports.updateMultipleUsers=(req,res)=>{
         }
       })
       res.send(update)
-
-     
     }
   })
   }
@@ -177,36 +169,28 @@ module.exports.updateMultipleUsers=(req,res)=>{
 
 
 module.exports.deleteUser=(req,res)=>{
-  // const {id}= req.params;
-  // const filter = {_id:id};
-  // tools = tools.filter(tool=>tool.id !==Number(id));
   let user;
   fs.readFile("user.json",(err,data)=>{
     if(err){
-      console.log('something went wrong')
+      res.send('Something went wrong')
     } else{
       user = JSON.parse(data)
          
           const {id}=req.params;
-          console.log(id)
+          // console.log(id)
 
           const deleteUser = user.filter(x=>x.id!==Number(id))
          
 fs.writeFileSync('user.json',JSON.stringify(deleteUser),(err)=>{
       if(err){
-        console.log('Something went wrong')
+        res.send('Something went wrong')
       } else{
-        console.log('delete user successfully')
+        res.send('delete user successfully')
       }
     })
     res.send(deleteUser)
-
-    }
-    
-  })
-
- 
-
+  }
+    })
 }
 
 
